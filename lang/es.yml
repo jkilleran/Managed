@@ -1,0 +1,47 @@
+home:
+  emptyList: Agregue un gasto para comenzar
+login:
+  title: Spend-o-meter
+  subtitle: Tu app de finanzas personales
+  notice:
+    line1: "Al usar esta aplicación estás aceptando nuestros "
+    line2: "Términos de servicio"
+    line3: " y "
+    line4: "Política de privacidad"
+  help:
+    terms: >
+      Este servicio se provee "COMO VIENE" y no se da garantía en cómo se manejan
+      los datos y la disponibillildad del servicio. Los términos y condiciones finales
+      serán publicados cuando la app se ponga en producción.
+    privacy: >
+      Todos tus datos serán guardados anónimamente en Firebase Firestore y permanecerán de esa manera.
+      Ningún otro usuario tendrá acceso a tus datos.
+add:
+  category: Categoría
+  today: Hoy
+  categories:
+    - Compras
+    - Alcohol
+    - Comida Rápida
+    - Facturas
+    - Transporte
+    - Otros
+  currency: $
+  add: Agregar Gasto
+settings:
+  title: Opciones
+  dark_mode: Usar modo oscuro?
+  signout: Salir
+months:
+  jan: Enero
+  feb: Febrero
+  mar: Marzo
+  apr: Abril
+  may: Mayo
+  jun: Junio
+  jul: Julio
+  aug: Agosto
+  sep: Septiembre
+  oct: Octubre
+  nov: Noviembre
+  dec: Diciembre
