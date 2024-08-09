@@ -7,7 +7,7 @@ class DetailsPage extends StatelessWidget {
   final List<DocumentSnapshot> documents;
   final Function(String) onDelete;
 
-  const DetailsPage({Key key, this.categoryName, this.documents, this.onDelete})
+  const DetailsPage({required Key key, required this.categoryName, required this.documents, required this.onDelete})
       : super(key: key);
 
   @override
@@ -22,9 +22,9 @@ class DetailsPage extends StatelessWidget {
           var document = documents[index];
 
           return Dismissible(
-            key: Key(document.documentID),
+            key: Key(document.id),
             onDismissed: (direction) {
-              onDelete(document.documentID);
+              onDelete(document.id);
             },
             child: new DayExpenseListTile(document: document),
           );

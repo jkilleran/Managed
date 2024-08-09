@@ -5,7 +5,6 @@ class ThemeState with ChangeNotifier {
 
   ThemeData get currentTheme => _isDarkModeEnabled
       ? ThemeData.dark().copyWith(
-          accentColor: Colors.red,
           buttonTheme: ButtonThemeData(
             buttonColor: Colors.red,
           ),
@@ -13,7 +12,7 @@ class ThemeState with ChangeNotifier {
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
           ),
-          toggleableActiveColor: Colors.red,
+          toggleableActiveColor: Colors.red, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.red),
         )
       : _getThemeLight();
 

@@ -17,7 +17,7 @@ class MonthWidget extends StatefulWidget {
   final GraphType graphType;
   final int month;
 
-  MonthWidget({Key key, @required this.month, this.graphType, this.documents, days})
+  MonthWidget({required Key key, required this.month, required this.graphType, required this.documents, days})
       :
         total = documents.map((doc) => doc['value'])
             .fold(0.0, (a, b) => a + b),
@@ -31,7 +31,7 @@ class MonthWidget extends StatefulWidget {
             map[document['category']] = 0.0;
           }
 
-          map[document['category']] += document['value'];
+          map[document['category']] == document['value'];
           return map;
         }),
         super(key: key);
@@ -84,15 +84,15 @@ class _MonthWidgetState extends State<MonthWidget> {
       return Container(
         height: 250.0,
         child: LinesGraphWidget(
-          data: widget.perDay,
+          data: widget.perDay, key: UniqueKey(),
         ),
       );
     } else {
-      var perCategory = widget.categories.keys.map((name) => widget.categories[name] / widget.total).toList();
+      var perCategory = widget.categories.keys.map((name) => widget.categories[name]! / widget.total).toList();
       return Container(
         height: 250.0,
         child: PieGraphWidget(
-          data: perCategory,
+          data: perCategory, key: UniqueKey(),
         ),
       );
     }
@@ -146,7 +146,7 @@ class _MonthWidgetState extends State<MonthWidget> {
         itemBuilder: (BuildContext context, int index) {
           var key = widget.categories.keys.elementAt(index);
           var data = widget.categories[key];
-          return _item(FontAwesomeIcons.shoppingCart, key, 100 * data ~/ widget.total, data);
+          return _item(FontAwesomeIcons.shoppingCart, key, 100 * data! ~/ widget.total, data);
         },
         separatorBuilder: (BuildContext context, int index) {
           return Container(

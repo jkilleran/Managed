@@ -18,12 +18,12 @@ class _TapGestureRecognizerHook extends Hook<TapGestureRecognizer> {
 
 class _TapGestureRecognizerHookState
     extends HookState<TapGestureRecognizer, _TapGestureRecognizerHook> {
-  TapGestureRecognizer _tapGestureRecognizer;
+  late TapGestureRecognizer _tapGestureRecognizer;
 
   @override
   void initHook() {
     super.initHook();
-    _tapGestureRecognizer = TapGestureRecognizer()..onTap = hook.onTap;
+    _tapGestureRecognizer = TapGestureRecognizer()..onTap = hook.onTap as GestureTapCallback?;
   }
 
 

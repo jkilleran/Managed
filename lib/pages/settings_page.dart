@@ -40,7 +40,7 @@ class SettingsPage extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              child: RaisedButton(
+              child: ElevatedButton(
                 onPressed: () {
                   Provider.of<LoginState>(context).logout();
                   Navigator.of(context).pop();

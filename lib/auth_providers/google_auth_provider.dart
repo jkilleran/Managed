@@ -8,14 +8,14 @@ class GoogleAuthenticationProvider implements AuthenticationProvider {
 
   @override
   Future<AuthCredential> handleSignIn() async {
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
     if (googleUser == null) {
-      return null;
+      throw Exception('Error de autenticacion.');
     }
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
 
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
+    final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );

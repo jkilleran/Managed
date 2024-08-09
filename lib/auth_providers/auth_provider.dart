@@ -1,5 +1,7 @@
 
 import 'package:como_gasto/auth_providers/google_auth_provider.dart';
+import 'package:como_gasto/auth_providers/Twitter_auth_provider.dart';
+import 'package:como_gasto/auth_providers/Facebook_auth_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 enum LoginProvider {
@@ -17,13 +19,13 @@ class AuthenticationProviderFactory {
         return GoogleAuthenticationProvider();
         break;
       case LoginProvider.TWITTER:
-      // TODO: Handle this case.
+      return TwitterAuthenticationProvider();
         break;
       case LoginProvider.FACEBOOK:
-      // TODO: Handle this case.
+      return FacebookAuthenticationProvider();
         break;
     }
-    return null;
+    return throw Exception("Error al intentar autenticarte.");
   }
 }
 

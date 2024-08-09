@@ -4,7 +4,7 @@ class CategorySelectionWidget extends StatefulWidget {
   final Map<String, IconData> categories;
   final Function(String) onValueChanged;
 
-  const CategorySelectionWidget({Key key, this.categories, this.onValueChanged}) : super(key: key);
+  const CategorySelectionWidget({required Key key, required this.categories, required this.onValueChanged}) : super(key: key);
 
   @override
   _CategorySelectionWidgetState createState() =>
@@ -16,7 +16,7 @@ class CategoryWidget extends StatelessWidget {
   final IconData icon;
   final bool selected;
 
-  const CategoryWidget({Key key, this.name, this.icon, this.selected})
+  const CategoryWidget({required Key key, required this.name, required this.icon, required this.selected})
       : super(key: key);
 
   @override
@@ -63,7 +63,7 @@ class _CategorySelectionWidgetState extends State<CategorySelectionWidget> {
         child: CategoryWidget(
           name: name,
           icon: icon,
-          selected: name == currentItem,
+          selected: name == currentItem, key: UniqueKey(),
         ),
       ));
     });

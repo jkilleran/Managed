@@ -13,11 +13,11 @@ class LoginState with ChangeNotifier {
   bool _loggedIn = false;
   bool _loading = true;
 
-  FirebaseUser _user;
+  FirebaseAuth _user;
 
   LoginState({
-    @required SharedPreferences preferences,
-    @required FirebaseAuth firebaseAuth,
+    required SharedPreferences preferences,
+    required FirebaseAuth firebaseAuth,
     AuthenticationProviderFactory authenticationProviderFactory =
         const AuthenticationProviderFactory(),
   }) {
@@ -31,7 +31,7 @@ class LoginState with ChangeNotifier {
 
   bool isLoading() => _loading;
 
-  FirebaseUser currentUser() => _user;
+  FirebaseAuth currentUser() => _user;
 
   Future<void> login(LoginProvider loginProvider) async {
     _authenticationProvider =
@@ -45,10 +45,10 @@ class LoginState with ChangeNotifier {
     if (authCredentials != null) {
       var authResult = await _auth.signInWithCredential(authCredentials);
       if (authResult != null) {
-        _user = authResult.user;
+        _user = authResult.user as FirebaseAuth;
       }
       if (_user != null) {
-        print("signed in " + _user.displayName);
+        print("signed in ");
       }
     }
 
@@ -62,7 +62,7 @@ class LoginState with ChangeNotifier {
     _prefs.clear();
     if (_authenticationProvider != null) {
       _authenticationProvider.logout();
-      _authenticationProvider = null;
+      _authenticationProvider == null;
     }
     _auth.signOut();
     _loggedIn = false;
@@ -71,7 +71,7 @@ class LoginState with ChangeNotifier {
 
   void loginState() async {
     if (_prefs.containsKey('isLoggedIn')) {
-      _user = await _auth.currentUser();
+      _user = (await _auth.currentUser!) as FirebaseAuth;
       _loggedIn = _user != null;
       _loading = false;
       notifyListeners();

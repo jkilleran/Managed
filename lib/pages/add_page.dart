@@ -8,8 +8,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:yaml/yaml.dart';
-import 'dart:io' show Platform;
 
 import '../como_gasto_icons.dart';
 import '../expenses_repository.dart';
@@ -17,26 +15,26 @@ import '../expenses_repository.dart';
 class AddPage extends StatefulWidget {
   final Rect buttonRect;
 
-  const AddPage({Key key, this.buttonRect}) : super(key: key);
+  const AddPage({required Key key, required this.buttonRect}) : super(key: key);
 
   @override
   _AddPageState createState() => _AddPageState();
 }
 
 class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation _buttonAnimation;
-  Animation _pageAnimation;
+  late AnimationController _controller;
+  late Animation _buttonAnimation;
+  late Animation _pageAnimation;
 
-  String category;
+  late String category;
   int value = 0;
 
-  String dateStr;
+  late String dateStr;
   DateTime date = DateTime.now();
 
-  File _selectedPicture;
+  File? _selectedPicture;
 
-  LocalAuthentication _localAth;
+  late LocalAuthentication _localAuth;
   bool _isBiometricAvailable = false;
 
   @override
@@ -44,9 +42,9 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
     super.initState();
 
     if (kIsWeb) {
-      _localAth = LocalAuthentication();
-      _localAth.canCheckBiometrics.then((b) async {
-        var methods = await _localAth.getAvailableBiometrics();
+      _localAuth = LocalAuthentication();
+      _localAuth.canCheckBiometrics.then((b) async {
+        var methods = await _localAuth.getAvailableBiometrics();
         var hasFingerprint = Platform.isIOS
             ? methods.any((m) => m == BiometricType.fingerprint)
             : true;
@@ -83,9 +81,7 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     ComoGastoLocalizations localizations = ComoGastoLocalizations.of(context);
-    if (dateStr == null) {
-      dateStr = localizations.t('add.today');
-    }
+    dateStr = localizations.t('add.today');
 
     var h = MediaQuery.of(context).size.height;
     return Stack(
@@ -136,11 +132,13 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
                   icon: Icon(ComoGastoIcons.camera),
                   color: Colors.grey,
                   onPressed: () async {
-                    var image =
-                        await ImagePicker.pickImage(source: ImageSource.camera);
+                    final ImagePicker picker = ImagePicker();
+                    final XFile? image = await picker.pickImage(source: ImageSource.camera);
 
                     setState(() {
-                      _selectedPicture = image;
+                      if (image != null) {
+                        _selectedPicture = File(image.path);
+                      }
                     });
                   },
                 )
@@ -162,7 +160,7 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
         if (_selectedPicture != null)
           SizedBox(
             height: 100,
-            child: Image.file(_selectedPicture),
+            child: Image.file(_selectedPicture!),
           ),
         _currentValue(localizations),
         _numpad(),
@@ -174,7 +172,7 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
   }
 
   Widget _categorySelector(ComoGastoLocalizations localizations) {
-    YamlList categories = localizations.t('add.categories');
+    var categories = localizations.t('add.categories');
     print(categories);
 
     return Container(
@@ -188,7 +186,7 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
           categories[4]: FontAwesomeIcons.carAlt,
           categories[5]: FontAwesomeIcons.infinity,
         },
-        onValueChanged: (newCategory) => category = newCategory,
+        onValueChanged: (newCategory) => category = newCategory, key: UniqueKey(),
       ),
     );
   }
@@ -202,7 +200,7 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
         "${localizations.t('add.currency')}${realValue.toStringAsFixed(2)}",
         style: TextStyle(
           fontSize: 50.0,
-          color: Theme.of(context).textTheme.title.color,
+          color: Theme.of(context).textTheme.titleSmall!.color,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -308,7 +306,7 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
         //<-- Margin from bottom
         child: Container(
           width: double.infinity,
-          //<-- Blue cirle
+          //<-- Blue circle
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
                 buttonWidth * (1 - _buttonAnimation.value)),
@@ -363,11 +361,11 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
               onPressed: () async {
                 var db =
                     Provider.of<ExpensesRepository>(context, listen: false);
-                if (value > 0 && category != "") {
+                if (value > 0 && category.isNotEmpty) {
                   if (_isBiometricAvailable) {
                     bool didAuthenticate =
-                        await _localAth.authenticateWithBiometrics(
-                      localizedReason: "Please identify yourself!",
+                        await _localAuth.authenticate(
+                      localizedReason: "Porfavor identificate!",
                     );
                     if (didAuthenticate) {
                       _saveAndBack(db);
@@ -375,9 +373,9 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
                       showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                                content: Text("You need to identify yourself."),
+                                content: Text("Necesitas identificarte."),
                                 actions: <Widget>[
-                                  FlatButton(
+                                  TextButton(
                                     child: Text('Ok'),
                                     onPressed: () {
                                       Navigator.of(context).pop();
@@ -394,9 +392,9 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
                       context: context,
                       builder: (context) => AlertDialog(
                             content: Text(
-                                "You need to select a category and a value greater than zero."),
+                                "..."),
                             actions: <Widget>[
-                              FlatButton(
+                              TextButton(
                                 child: Text('Ok'),
                                 onPressed: () {
                                   Navigator.of(context).pop();
@@ -413,8 +411,8 @@ class _AddPageState extends State<AddPage> with SingleTickerProviderStateMixin {
     }
   }
 
-  _saveAndBack(ExpensesRepository db) {
-    db.add(category, value / 100.0, date, _selectedPicture);
+  void _saveAndBack(ExpensesRepository db) {
+    db.add(category, value / 100.0, date, _selectedPicture!);
 
     _controller.reverse();
   }

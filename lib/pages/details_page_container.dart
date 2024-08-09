@@ -15,7 +15,7 @@ class DetailsParams {
 class DetailsPageContainer extends StatelessWidget {
   final DetailsParams params;
 
-  const DetailsPageContainer({Key key, this.params}) : super(key: key);
+  const DetailsPageContainer({required Key key, required this.params}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +28,10 @@ class DetailsPageContainer extends StatelessWidget {
         if (data.hasData) {
           return DetailsPage(
             categoryName: params.categoryName,
-            documents: data.data.documents,
+            documents: data.data!.docs,
             onDelete: (documentId) {
               db.delete(documentId);
-            },
+            }, key: UniqueKey(),
           );
         }
 

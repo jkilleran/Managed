@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:charts_flutter/flutter.dart';
+import 'package:fl_chart/fl_chart.dart' as fl_chart;
+import 'package:flutter/material.dart';
 
 class PieGraphWidget extends StatefulWidget {
   final List<double> data;
 
-  const PieGraphWidget({Key key, this.data}) : super(key: key);
+  const PieGraphWidget({required Key key, required this.data}) : super(key: key);
 
   @override
   _PieGraphWidgetState createState() => _PieGraphWidgetState();
@@ -16,7 +18,7 @@ class _PieGraphWidgetState extends State<PieGraphWidget> {
     List<Series<double, num>> series = [
       Series<double, int>(
         id: 'Gasto',
-        domainFn: (value, index) => index,
+        domainFn: (value, index) => index!,
         measureFn: (value, _) => value,
         data: widget.data,
         strokeWidthPxFn: (_, __) => 4,
@@ -30,14 +32,14 @@ class _PieGraphWidgetState extends State<PieGraphWidget> {
 class LinesGraphWidget extends StatefulWidget {
   final List<double> data;
 
-  const LinesGraphWidget({Key key, this.data}) : super(key: key);
+  const LinesGraphWidget({required Key key, required this.data}) : super(key: key);
 
   @override
   _LinesGraphWidgetState createState() => _LinesGraphWidgetState();
 }
 
 class _LinesGraphWidgetState extends State<LinesGraphWidget> {
-  _onSelectionChanged(SelectionModel model) {
+  _onSelectionChanged(SelectionModel model) async {
     final selectedDatum = model.selectedDatum;
 
     var time;
@@ -51,7 +53,7 @@ class _LinesGraphWidgetState extends State<LinesGraphWidget> {
     if (selectedDatum.isNotEmpty) {
       time = selectedDatum.first.datum;
       selectedDatum.forEach((SeriesDatum datumPair) {
-        measures[datumPair.series.displayName] = datumPair.datum;
+        measures[datumPair.series.displayName ?? 'default_name'] = datumPair.datum;
       });
     }
 
@@ -71,7 +73,7 @@ class _LinesGraphWidgetState extends State<LinesGraphWidget> {
       Series<double, int>(
         id: 'Gasto',
         colorFn: (_, __) => MaterialPalette.purple.shadeDefault,
-        domainFn: (value, index) => index,
+        domainFn: (value, index) => index!,
         measureFn: (value, _) => value,
         data: widget.data,
         strokeWidthPxFn: (_, __) => 4,

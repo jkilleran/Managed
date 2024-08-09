@@ -4,7 +4,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-
+import 'package:rive/rive.dart';
 import '../states/login_state.dart';
 import 'ui/legal_notice_widget.dart';
 import 'ui/social_login_widget.dart';
@@ -21,28 +21,28 @@ class LoginPage extends StatelessWidget {
           children: <Widget>[
             Text(
               localizations.t('login.title'),
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.displayMedium,
             ),
             Padding(
               padding: const EdgeInsets.all(32.0),
               child: Container(
                 height: 300,
-                child: FlareActor(
-                  "assets/login_background.flr",
-                  animation: "idle",
+                child: RiveAnimation.asset(
+                  'assets/login_background.riv',
+                  animations: ['idle'],
                 ),
               ),
             ),
             Text(
               localizations.t('login.subtitle'),
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             Consumer<LoginState>(
-              builder: (BuildContext context, LoginState value, Widget child) {
+              builder: (BuildContext context, LoginState value, Widget? child) {
                 if (value.isLoading()) {
                   return CircularProgressIndicator();
                 } else {
-                  return child;
+                  return child!;
                 }
               },
               child: Container(

@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+
 abstract class LocalNotifications {
   void init({
-    @required SelectNotificationCallback onSelectNotification,
-    @required DidReceiveLocalNotificationCallback onDidReceiveLocalNotification,
+    required Future<void> Function(String? payload) onSelectNotification,
+    required Future<void> Function(int id, String? title, String? body, String? payload) onDidReceiveLocalNotification,
   });
 }
 
 class WebLocalNotifications extends LocalNotifications {
   @override
-  void init({onSelectNotification, onDidReceiveLocalNotification}) {
+  void init({
+    required Future<void> Function(String? payload) onSelectNotification,
+    required Future<void> Function(int id, String? title, String? body, String? payload) onDidReceiveLocalNotification,
+  }) {
     // no-op
   }
 }
@@ -23,39 +27,51 @@ class MobileLocalNotifications extends LocalNotifications {
 
   @override
   void init({
-    @required SelectNotificationCallback onSelectNotification,
-    @required DidReceiveLocalNotificationCallback onDidReceiveLocalNotification,
+    required Future<void> Function(String? payload) onSelectNotification,
+    required Future<void> Function(int id, String? title, String? body, String? payload) onDidReceiveLocalNotification,
   }) {
-    // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-    var initializationSettingsAndroid =
-        new AndroidInitializationSettings('app_icon');
-    var initializationSettingsIOS = new IOSInitializationSettings(
-      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-    );
-    var initializationSettings = new InitializationSettings(
-      initializationSettingsAndroid,
-      initializationSettingsIOS,
+    var initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+    var initializationSettingsIOS = IOSInitializationSettings();
+
+    var initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
     );
 
-    flutterLocalNotificationsPlugin
-        .initialize(
+    flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onSelectNotification: onSelectNotification,
-    )
-        .then((init) {
+    ).then((_) {
       _setupNotification();
     });
   }
 
   void _setupNotification() async {
-    var time = new Time(16, 11, 0);
-    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-        'daily-notifications', 'Daily Notifications', 'Daily Notifications');
-    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-    var platformChannelSpecifics = new NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    var time = Time(16, 11, 0);
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'daily-notifications', 
+      'Daily Notifications',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
 
-    await flutterLocalNotificationsPlugin.showDailyAtTime(0, 'Spend-o-meter',
-        "Don't forget to add your expenses", time, platformChannelSpecifics);
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    var platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
+
+    await flutterLocalNotificationsPlugin.showDailyAtTime(
+      0,
+      'Spend-o-meter',
+      "Don't forget to add your expenses",
+      time,
+      platformChannelSpecifics,
+    );
   }
 }
