@@ -95,7 +95,7 @@ class _SpendingBudgetsViewState extends State<SpendingBudgetsView> {
                           fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      "of \$2,0000 budget",
+                      "de \$2,000 presupuesto", // Traducido
                       style: TextStyle(
                           color: TColor.gray30,
                           fontSize: 12,
@@ -127,7 +127,7 @@ class _SpendingBudgetsViewState extends State<SpendingBudgetsView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Your budgets are on tack 👍",
+                        "Tus presupuestos están en orden 👍", // Traducido
                         style: TextStyle(
                             color: TColor.white,
                             fontSize: 14,
@@ -174,7 +174,7 @@ class _SpendingBudgetsViewState extends State<SpendingBudgetsView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Add new category ",
+                          "Añadir nueva categoría", // Traducido
                           style: TextStyle(
                               color: TColor.gray30,
                               fontSize: 14,

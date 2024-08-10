@@ -100,7 +100,7 @@ class _CardsViewState extends State<CardsView> {
                   height: 8,
                 ),
                 Text(
-                  "Virtual Card",
+                  "Tarjeta Virtual", // Traducido
                   style: TextStyle(
                       color: TColor.white,
                       fontSize: 16,
@@ -110,7 +110,7 @@ class _CardsViewState extends State<CardsView> {
                   height: 115,
                 ),
                 Text(
-                  cObj["name"] ?? "Code For Any",
+                  cObj["name"] ?? "Código para cualquiera", // Traducido
                   style: TextStyle(
                       color: TColor.gray20,
                       fontSize: 12,
@@ -170,7 +170,7 @@ class _CardsViewState extends State<CardsView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Credit Cards",
+                            "Tarjetas de Crédito", // Traducido
                             style:
                                 TextStyle(color: TColor.gray30, fontSize: 16),
                           ),
@@ -200,7 +200,7 @@ class _CardsViewState extends State<CardsView> {
                 ),
 
                 Text(
-                  "Subscriptions",
+                  "Suscripciones", // Traducido
                   style: TextStyle(
                       color: TColor.white,
                       fontSize: 16,
@@ -257,7 +257,7 @@ class _CardsViewState extends State<CardsView> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Add new card",
+                                    "Agregar nueva tarjeta", // Traducido
                                     style: TextStyle(
                                         color: TColor.gray30,
                                         fontSize: 14,

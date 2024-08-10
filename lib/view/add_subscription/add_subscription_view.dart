@@ -67,7 +67,7 @@ class _AddSubScriptionViewState extends State<AddSubScriptionView> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "New",
+                              "Nuevo", // Traducido
                               style:
                                   TextStyle(color: TColor.gray30, fontSize: 16),
                             )
@@ -78,7 +78,7 @@ class _AddSubScriptionViewState extends State<AddSubScriptionView> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       child: Text(
-                        "Add new\n subscription",
+                        "Agregar nueva\n suscripción", // Traducido
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: TColor.white,
@@ -136,7 +136,7 @@ class _AddSubScriptionViewState extends State<AddSubScriptionView> {
 
             Padding(
               padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-              child: RoundTextField(title: "Description", titleAlign: TextAlign.center, controller: txtDescription, )
+              child: RoundTextField(title: "Descripción", titleAlign: TextAlign.center, controller: txtDescription, ) // Traducido
 
             ),
 
@@ -164,7 +164,7 @@ class _AddSubScriptionViewState extends State<AddSubScriptionView> {
                   Column(
                     children: [
                         Text(
-                        "Monthly price",
+                        "Precio mensual", // Traducido
                         style: TextStyle(
                             color: TColor.gray40,
                             fontSize: 12,
@@ -206,7 +206,7 @@ class _AddSubScriptionViewState extends State<AddSubScriptionView> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child:
-                  PrimaryButton(title: "Add this platform", onPressed: () {}),
+                  PrimaryButton(title: "Agregar esta plataforma", onPressed: () {}), // Traducido
             ),
             const SizedBox(
               height: 20,

@@ -39,7 +39,7 @@ class _SettingsViewState extends State<SettingsView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Settings",
+                      "Configuración", // Traducido
                       style: TextStyle(color: TColor.gray30, fontSize: 16),
                     )
                   ],
@@ -66,7 +66,7 @@ class _SettingsViewState extends State<SettingsView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Code For Any",
+                  "Persona ficticia", // Traducido
                   style: TextStyle(
                       color: TColor.white,
                       fontSize: 20,
@@ -81,7 +81,7 @@ class _SettingsViewState extends State<SettingsView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "codeforany@gmail.com",
+                  "Correoelectronico@ejemplo.com",
                   style: TextStyle(
                       color: TColor.gray30,
                       fontSize: 12,
@@ -105,7 +105,7 @@ class _SettingsViewState extends State<SettingsView> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Text(
-                  "Edit profile",
+                  "Editar perfil", // Traducido
                   style: TextStyle(
                       color: TColor.white,
                       fontSize: 12,
@@ -140,12 +140,12 @@ class _SettingsViewState extends State<SettingsView> {
                     child: Column(
                       children: [
                         IconItemRow(
-                          title: "Security",
+                          title: "Seguridad", // Traducido
                           icon: "assets/img/face_id.png",
                           value: "FaceID",
                         ),
                         IconItemSwitchRow(
-                          title: "iCloud Sync",
+                          title: "Sincronización de iCloud", // Traducido
                           icon: "assets/img/icloud.png",
                           value: isActive,
                           didChange: (newVal) {
@@ -161,7 +161,7 @@ class _SettingsViewState extends State<SettingsView> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 8),
                     child: Text(
-                      "My subscription",
+                      "Mi suscripción", // Traducido
                       style: TextStyle(
                           color: TColor.white,
                           fontSize: 14,
@@ -180,19 +180,19 @@ class _SettingsViewState extends State<SettingsView> {
                     child: Column(
                       children: [
                         IconItemRow(
-                          title: "Sorting",
+                          title: "Ordenar", // Traducido
                           icon: "assets/img/sorting.png",
-                          value: "Date",
+                          value: "Fecha", // Traducido
                         ),
 
                         IconItemRow(
-                          title: "Summary",
+                          title: "Resumen", // Traducido
                           icon: "assets/img/chart.png",
-                          value: "Average",
+                          value: "Promedio", // Traducido
                         ),
 
                         IconItemRow(
-                          title: "Default currency",
+                          title: "Moneda por defecto", // Traducido
                           icon: "assets/img/money.png",
                           value: "USD (\$)",
                         ),
@@ -204,7 +204,7 @@ class _SettingsViewState extends State<SettingsView> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 8),
                     child: Text(
-                      "Appearance",
+                      "Apariencia", // Traducido
                       style: TextStyle(
                           color: TColor.white,
                           fontSize: 14,
@@ -223,17 +223,17 @@ class _SettingsViewState extends State<SettingsView> {
                     child: Column(
                       children: [
                         IconItemRow(
-                          title: "App icon",
+                          title: "Ícono de la app", // Traducido
                           icon: "assets/img/app_icon.png",
-                          value: "Default",
+                          value: "Predeterminado", // Traducido
                         ),
                         IconItemRow(
-                          title: "Theme",
+                          title: "Tema", // Traducido
                           icon: "assets/img/light_theme.png",
-                          value: "Dark",
+                          value: "Oscuro", // Traducido
                         ),
                         IconItemRow(
-                          title: "Font",
+                          title: "Fuente", // Traducido
                           icon: "assets/img/font.png",
                           value: "Inter",
                         ),

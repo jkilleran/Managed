@@ -72,7 +72,7 @@ class _CalenderViewState extends State<CalenderView> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Calender",
+                                    "Calendario", // Traducido
                                     style: TextStyle(
                                         color: TColor.gray30, fontSize: 16),
                                   ),
@@ -98,7 +98,7 @@ class _CalenderViewState extends State<CalenderView> {
                             height: 20,
                           ),
                           Text(
-                            "Subs\nSchedule",
+                            "Subs\nProgramación", // Traducido
                             style: TextStyle(
                                 color: TColor.white,
                                 fontSize: 40,
@@ -111,7 +111,7 @@ class _CalenderViewState extends State<CalenderView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "3 subscription for today",
+                                "3 suscripciones para hoy", // Traducido
                                 style: TextStyle(
                                     color: TColor.gray30,
                                     fontSize: 14,
@@ -136,7 +136,7 @@ class _CalenderViewState extends State<CalenderView> {
                                   child: Row(
                                     children: [
                                       Text(
-                                        "January",
+                                        "Enero", // Traducido
                                         style: TextStyle(
                                             color: TColor.white,
                                             fontSize: 12,
@@ -226,7 +226,7 @@ class _CalenderViewState extends State<CalenderView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "January",
+                        "Enero", // Traducido
                         style: TextStyle(
                             color: TColor.white,
                             fontSize: 20,
@@ -252,7 +252,7 @@ class _CalenderViewState extends State<CalenderView> {
                             fontWeight: FontWeight.w500),
                       ),
                       Text(
-                        "in upcoming bills",
+                        "en facturas próximas", // Traducido
                         style: TextStyle(
                             color: TColor.gray30,
                             fontSize: 12,

@@ -56,14 +56,14 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     var media = MediaQuery.sizeOf(context); // Obtiene las dimensiones de la pantalla.
     return Scaffold(
-      backgroundColor: TColor.gray, // Fondo de la pantalla.
+      backgroundColor: Colors.black87, // Fondo de la pantalla.
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
               height: media.width * 1.1, // Ajusta la altura en función del ancho de la pantalla.
               decoration: BoxDecoration(
-                color: TColor.gray70.withOpacity(0.5), // Fondo semitransparente.
+                color: Colors.blueGrey[800], // Fondo semitransparente oscuro.
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(25),
                   bottomRight: Radius.circular(25),
@@ -72,7 +72,7 @@ class _HomeViewState extends State<HomeView> {
               child: Stack(
                 alignment: Alignment.center, // Alinea todos los widgets en el centro.
                 children: [
-                  //Image.asset("assets/img/home_bg.png"), // Imagen de fondo.
+                  Image.asset("assets/img/home_bg.png"), // Imagen de fondo.
                   Stack(
                     alignment: Alignment.topCenter,
                     children: [
@@ -102,7 +102,7 @@ class _HomeViewState extends State<HomeView> {
                                 "assets/img/settings.png",
                                 width: 25,
                                 height: 25,
-                                color: TColor.gray30, // Ícono de configuración.
+                                color: Colors.white, // Ícono de configuración en blanco.
                               ),
                             )
                           ],
@@ -114,16 +114,16 @@ class _HomeViewState extends State<HomeView> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(height: media.width * 0.05),
-                      Image.asset(
+                      /*Image.asset(
                         "assets/img/app_logo.png",
                         width: media.width * 0.25,
                         fit: BoxFit.contain, // Logotipo de la aplicación.
-                      ),
+                      ),*/
                       SizedBox(height: media.width * 0.07),
                       Text(
                         "\$1,235",
                         style: TextStyle(
-                          color: TColor.white,
+                          color: Colors.white,
                           fontSize: 40,
                           fontWeight: FontWeight.w700, // Muestra el total de facturas.
                         ),
@@ -132,7 +132,7 @@ class _HomeViewState extends State<HomeView> {
                       Text(
                         "Gastos de este mes",
                         style: TextStyle(
-                          color: TColor.gray40,
+                          color: Colors.white70,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
@@ -144,15 +144,15 @@ class _HomeViewState extends State<HomeView> {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: TColor.border.withOpacity(0.15),
+                              color: Colors.white.withOpacity(0.25),
                             ),
-                            color: TColor.gray60.withOpacity(0.3),
+                            color: Colors.blueGrey[700], // Fondo del botón más oscuro.
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Text(
-                            "See your budget",
+                            "Ver tu presupuesto",
                             style: TextStyle(
-                              color: TColor.white,
+                              color: Colors.white,
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),
@@ -170,27 +170,27 @@ class _HomeViewState extends State<HomeView> {
                           children: [
                             Expanded(
                               child: StatusButton(
-                                title: "Active subs",
+                                title: "Suscripciones activas",
                                 value: "12",
-                                statusColor: TColor.secondary, // Botón con el número de suscripciones activas.
+                                statusColor: Colors.tealAccent, // Botón con el número de suscripciones activas.
                                 onPressed: () {},
                               ),
                             ),
                             const SizedBox(width: 8),
                             Expanded(
                               child: StatusButton(
-                                title: "Highest subs",
+                                title: "Suscripción más cara",
                                 value: "\$19.99",
-                                statusColor: TColor.primary10, // Botón con la suscripción más cara.
+                                statusColor: Colors.deepOrangeAccent, // Botón con la suscripción más cara.
                                 onPressed: () {},
                               ),
                             ),
                             const SizedBox(width: 8),
                             Expanded(
                               child: StatusButton(
-                                title: "Lowest subs",
+                                title: "Suscripción más barata",
                                 value: "\$5.99",
-                                statusColor: TColor.secondaryG, // Botón con la suscripción más barata.
+                                statusColor: Colors.amberAccent, // Botón con la suscripción más barata.
                                 onPressed: () {},
                               ),
                             )
@@ -207,14 +207,14 @@ class _HomeViewState extends State<HomeView> {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               height: 50,
               decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(15), // Segmento de botones.
+                color: Colors.grey[900], // Fondo de los botones de selección.
+                borderRadius: BorderRadius.circular(15),
               ),
               child: Row(
                 children: [
                   Expanded(
                     child: SegmentButton(
-                      title: "Your subscription",
+                      title: "Tu suscripción",
                       isActive: isSubscription,
                       onPressed: () {
                         setState(() {
@@ -225,7 +225,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   Expanded(
                     child: SegmentButton(
-                      title: "Upcoming bills",
+                      title: "Facturas próximas",
                       isActive: !isSubscription,
                       onPressed: () {
                         setState(() {
@@ -263,11 +263,11 @@ class _HomeViewState extends State<HomeView> {
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: subArr.length,
+                itemCount: bilArr.length,
                 itemBuilder: (context, index) {
-                  var sObj = subArr[index] as Map? ?? {};
+                  var bObj = bilArr[index] as Map? ?? {};
                   return UpcomingBillRow(
-                    sObj: sObj,
+                    sObj: bObj,
                     onPressed: () {},
                   );
                 },
